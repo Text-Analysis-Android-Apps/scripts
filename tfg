@@ -6,16 +6,17 @@ WIN_PATH_TO_ZIP=PATH/TO/ZIP/ON/WINDOWS/NAME_OF_ZIP.zip
 # This variable contains the path to the final git repo which stores all the changes in SSH
 TARGET_REPO=USER/REPO.git
 TMP_FOLDER=temp_tfg
-echo -e "Please, visit \e]8;;$TFG_PATH/download/zip\athis is a link\e]8;;\a to download the latest TFG source code, and save it on:"
+echo -e "Please, visit \e]8;;$TFG_PATH/download/zip\athis link\e]8;;\a to download the latest TFG source code, and save it on:"
 echo "\"$WIN_PATH_TO_ZIP\""
 echo Please, enter any key to continue after downloading the zip.
 read varname
 echo Cloning the target repository from GitHub...
 git clone git@github.com:$TARGET_REPO $TMP_FOLDER
-echo Opening the zip file from $PATH_TO_ZIP
-unzip -o "$PATH_TO_ZIP" -d $TMP_FOLDER
-echo Adding changes to create a commit...
 cd $TMP_FOLDER
+git rm -rf *
+echo Opening the zip file from $PATH_TO_ZIP
+unzip -o "$PATH_TO_ZIP" -d . > /dev/null
+echo Adding changes to create a commit...
 git add *
 echo Committing changes... Please, enter a commit message when prompted...
 git commit
